@@ -1,2 +1,1 @@
-# module-four-experiment-or-cvo-lstach
-Read me
+# Group - Logan Stach, Shriya Mandal, Jessica Wang, Carter Scott
