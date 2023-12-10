@@ -1,5 +1,8 @@
 Group - Logan Stach, Shriya Mandal, Jessica Wang, Carter Scott
 
+View the live deployment of our write-up with HTML visualizations [here](https://final-data-vis.tiiny.site)! (Please note that the D3 visualizations will take a second to load- just be patient!)  The HTML that was used for that website is also included in this repo.
+
+
 In this repository we have attached:
 * The 24 visualizations that were created using R and D3/HTML
 * The code to create the R and D3 visualizations
