@@ -8,6 +8,7 @@ In this repository we have attached:
 * The code to create the R and D3 visualizations
 * The responses to our survey as an Excel sheet
 * The final writeup as a PDF
+* The datasets
 
 Here are the surveys that we used to collect data:
 * [Survey 1](https://docs.google.com/forms/d/e/1FAIpQLSeLj7vNVGYHM3ZabBW3G-SjvDWOQeCXbBREpkGSR3CvVqKErA/viewform?fbzx=-7915634690915610099)
