@@ -1,0 +1,95 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-12-05"
+---
+
+```{r}
+# how to load in data
+library(readr)
+```
+
+
+```{r}
+turtles = read.csv("https://raw.githubusercontent.com/JA-McLean/STOR455/master/data/Turtles.csv")
+
+plot(Annuli ~ Mass, data = turtles)
+
+linmod1 = lm(Annuli ~ Mass, data = turtles)
+plot(Annuli ~ Mass, data = turtles)
+abline(linmod1)
+
+nonlinmod1 = lm(log(Annuli) ~ log(Mass), data=turtles)
+coefs = coef(nonlinmod1)
+b0 = coefs[1]
+b1 = coefs[2]
+plot(Annuli ~ Mass, data=turtles)
+curve(exp(b0) * x^b1, add=TRUE)
+```
+
+```{r}
+UsedCars <- read.csv("UsedCars.csv")
+StateOfMyChoice = "IA"
+ModelOfMyChoice = "Grand"
+MyCars = subset(UsedCars, Model==ModelOfMyChoice & State==StateOfMyChoice)
+MyCars$Age = 2017 - MyCars$Year
+```
+
+```{r}
+plot(Price ~ Age, data = MyCars)
+
+linmod2 = lm(Price ~ Age, data = MyCars)
+plot(Price ~ Age, data = MyCars)
+abline(linmod2)
+
+nonlinmod2 = lm(log(Price) ~ Age, data = MyCars)
+plot(Price ~ Age, data = MyCars)
+coefs = coef(nonlinmod2)
+curve((exp(x * coefs[2] + coefs[1])), add=TRUE)
+```
+
+```{r}
+library(Stat2Data)
+data("LongJumpOlympics2016")
+
+plot(Gold ~ Year, data = LongJumpOlympics2016)
+
+linmod3 = lm(Gold ~ Year, data = LongJumpOlympics2016)
+plot(Gold ~ Year, data = LongJumpOlympics2016)
+abline(linmod3)
+
+nonlinmod3 = lm(log(Gold) ~ Year, data = LongJumpOlympics2016)
+plot(Gold ~ Year, data = LongJumpOlympics2016)
+coefs = coef(nonlinmod3)
+curve((exp(x * coefs[2] + coefs[1])), add=TRUE)
+```
+
+```{r}
+StateSAT <- read_csv("https://raw.githubusercontent.com/JA-McLean/STOR455/master/data/StateSAT.csv",
+                     show_col_types = FALSE)
+StateSAT$TakersSq = StateSAT$Takers^2
+
+plot(SAT~Takers, data=StateSAT)
+
+TakersModel = lm(SAT~Takers, data=StateSAT)
+plot(SAT~Takers, data=StateSAT)
+abline(TakersModel)
+
+QuadModel = lm(SAT ~ Takers + TakersSq, data = StateSAT)
+qb0 = coef(QuadModel)[1]
+qb1 = coef(QuadModel)[2]
+qb2 = coef(QuadModel)[3]
+plot(SAT ~ Takers, data = StateSAT)
+curve(qb0 + qb1*x + qb2*x^2, add = T)
+```
+
+
+
+
+
+
+
+
+
+
+
