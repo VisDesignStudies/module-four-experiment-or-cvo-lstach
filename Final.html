@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- load d3.js -->
+<script src="https://unpkg.com/d3-regression@1.3.10/dist/d3-regression.min.js"></script>
+<script src="https://d3js.org/d3.v6.js"></script>
+<h1>How Trend Lines Affect the Interpretation of Datasets</h1>
+
+<h2>Target Question and Motivation</h2>
+
+<p>How do different best fit lines constructed using different regression models on a scatter plot, or the absence of a best fit line entirely, affect the viewer’s ability to understand the plot? </p>
+
+<p>We chose this question because lines of best fit are commonly used in scatterplots. We wanted to see if they had an noticeable impact upon people’s understanding, and also see how it differed between graphs with stronger or weaker correlations. Additionally, a line of best fit can be controversial because people may believe it does not accurately model the data or ignore outliers.</p>
+
+<h2>Preliminary Design</h2>
+
+<p>We created our preliminary design originally in an in-class activity (Week 13 Experimental Design). Below was our slide: </p>
+<!--- SLIDE IMAGE GOES HERE-->
+<a href="https://ibb.co/VHGr6Ln"><img src="https://i.ibb.co/7gD8hSM/slide-From-Class.png" alt="slide-From-Class" border="0"></a>
+
+<p>After creating this preliminary design, we sought to adapt it for our final project. We liked the idea of comparing visualizations with and without lines of best fit. However, we decided to not use the wrong line of best fit in our final project, because this is unlikely to occur in the real world. Many tools automatically create a line of best fit upon statistical and mathematical analysis. Instead, we decided to use both linear and nonlinear lines of best fit. This is the main design choice we made from this preliminary design – to remove the wrong line of best fit, and consider different methods of the line of best fit instead. </p>
+
+<h2>Methods</h2>
+
+<p>In order to investigate this question, we decided to use an experiment as it would allow us to collect data with a structured environment. We had several independent variables we wanted to consider, such as the correlation of the plot and whether there was a line of best fit or not. We also had several hypotheses on what we would see based upon our own experience encountering lines of best fits. We also wanted to collect more quantitative data than qualitative. After choosing the experiment option, we scoped out our experiment. 
+</p>
+
+<p>We plan to have people split into 3 different groups, and they will complete either of the 3 surveys independently based upon their group number. There should be an even number of people (we are estimating roughly 5-6 responses per survey) so that we can make better comparisons on how people interpret the graphs depending on the status of the line of best fit. The survey will be 8 sections long, with 4 questions per section. </p>
+
+<p>We are splitting people into 3 groups because we are using 8 different datasets. For each dataset, we are creating a scatterplot with no line of best fit, a linear line of best fit, and a nonlinear line of best fit. Within our 8 datasets, 4 of them have strong correlations while 4 have weaker correlations. We were able to split this evenly upon surveys, although for survey 1 and 3, there were 5 scatter plots with lines of best fit, and for survey 2, 6 lines. This was to be expected as we have 24 visualizations in total: 12 with strong correlations, 12 with weak correlations, 8 with no line of best fit, 8 with a linear line of best fit and 8 with a nonlinear line of best fit. Here are the final visualizations for one dataset with a strong correlation:</p>
+
+<!-- INSERT THE 3 IMAGES HERE-->
+
+<a href="https://ibb.co/xhndNS1"><img src="https://i.ibb.co/VVF5sWg/1.png" alt="1" border="0"></a>
+<a href="https://ibb.co/r3RPVDW"><img src="https://i.ibb.co/Qk3B4y5/2.png" alt="2" border="0"></a>
+<a href="https://ibb.co/WgKg6FS"><img src="https://i.ibb.co/GcPc0kg/3.png" alt="3" border="0"></a>
+
+
+
+<p>Within the 8 section survey, people will see only one of the three graphs of each dataset, to determine that each of the graphs are independently considered. We plan for participants to have 1.5 minutes per section of the survey, which should be ample time for them to consider the questions. The first three questions of the survey will be required (these are the quantitative portions) and the final question will be qualitative and not required unless someone has observations to note. </p>
+
+<p>The visualizations are created using D3 and R. We used datasets from multiple sources. We utilized the energy dataset from the module 3 assignment, as well as these sources:</p>
+
+<ul>
+  <li>
+    <a href="https://raw.githubusercontent.com/JA-McLean/STOR455/master/data/StateSAT.csv">https://raw.githubusercontent.com/JA-McLean/STOR455/master/data/StateSAT.csv</a>
+    <a href="https://raw.githubusercontent.com/JA-McLean/STOR455/master/data/Turtles.csv ">https://raw.githubusercontent.com/JA-McLean/STOR455/master/data/Turtles.csv</a>
+  </li>
+  <li>R Stat2Data library</li>
+  <li>UsedCar spreadsheet from Jessica’s STOR455 class</li>
+</ul>
+
+<p>The independent variables in our study will be:</p>
+
+<ul>
+  <li>
+    The different visualizations the participant will see – our participants will see scatterplots without best fit lines, ones with a linear best fit line and ones with an nonlinear/exponential best fit line. 
+  </li>
+  <li>
+    The ordering of the scatterplots – the participants will be divided into 3 different groups, and they will see different trend lines or no trend lines on each data set. They will not see the same data set with a different scatterplot model
+  </li>
+  <li>
+    The content of the data sets – the data sets that we construct visualizations out of could have a weak, positive, negative, neutral or different type of correlation. This will be reflected in the visualizations we present to the participants
+  </li>
+</ul>
+
+<p>The dependent variables in our study will be:</p>
+
+<ul>
+  <li>What participants believe the overall trend of the scatterplot is, and how accurately they are able to do so. This will be measured with multiple choice options.</li>
+  <li>How accurately participants can predict a data point from a scatterplot that could or could not have a best fit line – they will be given an x, and be asked to estimate a y. This will be measured with a short answer question expected to produce a numerical value. </li>
+  <li>How confident participants are in their y value prediction (considering we are manipulating both the correlation of the graph and no best fit line/type of best fit line). This will be on a scale of 1 (not confident) to 10 (very confident)</li>
+  <li>What observations participants had about the data shown in the visualization (for instance, did they see any outliers, multiple trends in one graph, or anything unusual?) This will be long answer/qualitative</li>
+</ul>
+
+<p>The control variables in our study will be:</p>
+
+<ul>
+  <li>
+    The number of visualizations each group is given – everyone will have the same number of questions on the Google form
+  </li>
+  <li>
+    The amount of time to look at each visualization – we will have a timer and have participants advance to the next section of questions every 1.5 minutes
+  </li>
+  <li>
+    The survey will be the same for each participant group
+  </li>
+  <li>
+    The survey will be conducted in the same environment (Google forms), and will formatted the same overall for all groups
+  </li>
+  <li>
+    Same four questions over all visualizations, three required and one non-required
+  </li>
+  <li>
+    The x value we will ask participant to calculate the y for will be the same for each dataset
+  </li>
+  <li>The same ordering of multiple choice options for all participants</li>
+</ul>
+
+<p>Below are our hypotheses about what we will see:</p>
+<ul>
+  <li>
+    We anticipate that people will follow the best fit line when it is present, irrespective of the type of best fit line that is there (linear or nonlinear).  This is because the human mind has evolved to find patterns even when none exist.  A line of best fit is the most obvious pattern people will see, even if inaccurate. People will feel most confident and be more accurate about predicting data points on graphs with a line of best fit and determining the overall trend. 
+  </li>
+  <li>
+    Similarly, when there are no lines of best fit, we anticipate people will largely be able to fill in the gaps and identify the trend in the data (i.e. where the line of best fit will be).  If there is no correlation, they will still attempt to find a trend for the reasons stated above (humans always seek patterns). However, we believe that people will feel less confident about predicting data points on graphs with no line of best fit and do so less accurately. They may also have a harder time predicting the overall trend. 
+  </li>
+  <li>
+    People will also have an easier time predicting data points and understanding the overall trend of data on graphs where data is showing a strong correlation, no matter if there is a line of best fit or not. They may struggle with these two tasks on ones that show a weak correlation, because they have to observe the data more carefully and make judgment calls, especially within a time limit. 
+  </li>
+  <li>
+    The survey will be conducted in the same environment (Google forms), and will formatted the same overall for all groups
+  </li>
+</ul>
+
+<p>Our experimental tasks will be that participants will complete a Google form with 8 different graphs corresponding to the survey number they were assigned. Since Google forms does not have an inbuilt timer to advance each section, we will ask each participant to advance to the next section upon our timer (1.5 minutes per question). On the Google form, for each section, there will be a picture of the visualization at the top, then 4 questions, 3 of which are required to advance. The four questions will be:</p>
+
+<ol type="1">
+  <li>What trend does this graph show?
+    <ul>
+      <li>
+        Multiple choice: positive, negative, neutral, unsure
+      </li>
+    </ul>
+  </li>
+  
+  <li>Given x = {a value}, what value do you expect for y?
+    <ul>
+      <li>
+        The x value asked for will be constant among the same data set – all 3 iterations of the visualization for the same data set will ask for the same, but different data sets will give a different x value relevant to the graph
+      </li>
+      <li>
+        A short answer question, expecting numerical values
+      </li>
+    </ul>
+  </li>
+
+  <li>On a scale of 1-10, how confident are you on this answer?
+    <ul>
+      <li>
+        On a scale of 1 (not confident at all) to 10 (certain)
+      </li>
+    </ul>
+  </li>
+
+  <li>Did you notice anything interesting or strange about the data in this graph?
+    <ul>
+      <li>
+        Long answer and not required, this is particularly to see how people feel about the visualization or data that could have affected their response to the past 3 questions
+      </li>
+    </ul>
+  </li>
+
+</ol>
+
+<p>Here are the three different surveys we created. Advancing through the surveys will showcase all of the different visualizations.</p>
+
+<ol type="1">
+  <li>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeLj7vNVGYHM3ZabBW3G-SjvDWOQeCXbBREpkGSR3CvVqKErA/viewform">Survey 1</a>
+  </li>
+
+  <li>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEll8lS0SdfEFpTTCbWuC33J-omPhLezifmsThtYEf6DNZuw/viewform">Survey 2</a>
+  </li>
+
+  <li>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfO5QkBBPycYm6Dmwu_tAgtYOdhyXK-twHnUEEnsidmhM3jCA/viewform">Survey 3</a>
+  </li>
+</ol>
+
+<h2>Analysis and Discussion</h2>
+
+<p>To analyze our data, we organized all of the 8 datasets separately – compiling and then comparing the answers for the visualization with no best fit line, the visualization with the linear best fit line and the visualization with the nonlinear best fit line. After conducting analysis upon our results, we found our hypotheses to mostly hold. We included both graphs with obvious correlations, and others without. We decided to split up our analysis between these two. </p>
+
+<p>When dealing with graphs with a noticeable correlation (positive or negative), we noticed that people felt about the same confidence in their answers – even if there was a line of best fit or not. The confidence averaged to around 5 to 6 out of 10. We noticed that the y values they predicted were accurate, or close to accurate.  When the trendline is linear, people’s guesses of the y-value become even more precise. Something interesting we noticed was that on plots with a linear trendline, people’s answers contained decimal points and ended in numbers other than 0 and 5. They were more precise. This is in contrast to the scatterplots with no line of best fit – people’s answers usually end in 0 or 5. When the trend was noticeable, people also correctly selected the trend, and there were few unsure or neutral answers. This is in line with our hypothesis that people will have an easier time predicting data values and determining the trend with a strong correlation. It was surprising to see that a line of best fit did not affect how confident people felt about graphs with strong correlation, but simply helped them be more accurate.</p>
+
+<p>When dealing with graphs without a noticeable correlation, the answers were more mixed. When there is no line of best fit, people were answering that the trend was neutral or that they were unsure. When there was a line of best fit, people would answer in accordance with the shape of the line. People’s confidence levels also varied. We found that people were most confident here predicting data values when there was a linear line of best fit (3x as much as no line of best fit), then when there was a nonlinear line of best fit (2x as much as no line of best fit) and least when there was no line of best fit. This definitely fit in with our hypothesis; although we did not realize that whether the trend line was linear or nonlinear made a difference. In terms of the data values that were predicted, when there was a line, people tended to follow the line, although some people did not (perhaps implying that they believed the line of best fit did not accurately capture the trend. When there was no line, people’s answers were much varied with a larger range. In particular, one participant tried to answer this sequence by giving a sequence of different values. </p>
+
+<p>We also had a qualitative question about whether there was anything interesting or strange about the graph. This was not a required question, and while we did get many answers near the beginning of the survey, by the end, there were fewer. People mentioned if they noticed if the points were clustered or super spread out. Additionally, people disliked the weak correlation plots with no lines. We also asked for participants' observations about the whole activity right after the experiment. People commented that they trusted the trendline, and it made them more confident in their answers. This was reflected in the data we collected. In graphs with no clear correlation, people noted they were less confident about their answers. These initial reactions matched with our more detailed analysis, as well as with our hypotheses overall. </p>
+
+
+<h2>Outside Voices</h2>
+
+<p>To get opinions from those without a background in data visualization, we recruited 3 other participants to be a part of our study.  They are:</p>
+
+<ul>
+  <li>
+    Jesse Wei, a graduate student in Computer Science and TA for COMP 311 at UNC-CH
+  </li>
+  <li>
+    Eric Schneider, a graduate student studying Computer Science at UNC-CH
+  </li>
+  <li>
+    Christine Mendoza, an undergraduate Computer Science student at UNC-CH
+  </li>
+</ul>
+
+<p>Their responses are marked on the <a href="https://docs.google.com/spreadsheets/d/1T-B4GmX4qB_aj0x_P8RRCtM2ynskkspjl61aLsbDf7s/edit#gid=1579611526">spreadsheet</a> with their names specified in the “Outside Voice” column.  None of these outside respondents produced quantifiably different survey responses.  Additionally, all 3 opined that the existence of trendlines in the survey they completed heavily influenced their opinion on the trend that they believed the dataset to possess, consistent with both our hypothesis and the responses of other participants.</p>
+
+<h2>Recommendations</h2>
+
+<p>To begin our activity, we assigned participants into either group 1, 2, or 3. There were supposed to be 5 people completing survey 1, 5 people completing survey 2 and 5 people completing survey 3. We told participants to scan the QR code corresponding to their number – the three . After submissions, we noticed that 5 people completed survey 1, 7 completed survey 2 and only 3 people completed survey. To help get some additional data on survey 3, the additional voices we incorporated were sent survey 1 and/or survey 3. Within the experiment time, we should have enforced people completing the correct survey so we would get an even spread of results. </p>
+
+<p>We also attempted to enforce the timer - 1.5 minutes per question. However, it was difficult to mandate this because Google forms does not have a timer, and any extensions that provided a time only did so for the entire form. Instead, we opted to have a timer on screen, set for 1.5 minutes per question. For the first section, we found it difficult to set up the timer, which may have slightly affected the results. However, we did get the timer working for all other sections.</p>
+
+<p>We did get several responses earlier than the expected end time. In another iteration of our experiment, we would make sure to mandate the timing, so people cannot skip ahead on sections. The timing was a control variable, but we were not able to fully control it during the experiment.</p>
+
+<p>In a future iteration, we would make sure that everyone is completing the survey they are assigned – perhaps participants could be emailed the link. Since we had all of the QR codes on the screen, it’s likely people clicked the first one that popped up. Additionally, we would utilize a different tool that advanced to the next section on a timer – this would likely be paid software. In our analysis, we also noted that people wrote fewer answers to the qualitative portion of the survey – this was not required. However, we could have made this question required so that all graphs were given an equal amount of consideration by participants.</p>
+
+<h2>Visualizations</h2>
+
+<p>Below, you will see the visualizations we constructed for our datasets using D3:</p>
+
+<h3>Dataset 1</h3>
+<div id="chart1"></div>
+<div id="chart2"></div>
+<div id="chart3"></div>
+<div id="chart4"></div>
+
+<h3>Dataset 2</h3>
+<div id="chart5"></div>
+<div id="chart6"></div>
+<div id="chart7"></div>
+<div id="chart8"></div>
+
+<h3>Dataset 3</h3>
+<div id="chart9"></div>
+<div id="chart10"></div>
+<div id="chart11"></div>
+<div id="chart12"></div>
+
+<h3>Dataset 4</h3>
+<div id="chart13"></div>
+<div id="chart14"></div>
+<div id="chart15"></div>
+<div id="chart16"></div>
+
+
+
+<p>We also constructed some of our visualizations using R:</p>
+
+
+<a href="https://ibb.co/71XdXkk"><img src="https://i.ibb.co/NysdsTT/1.png" alt="1" border="0"></a>
+<a href="https://ibb.co/gR4jcVK"><img src="https://i.ibb.co/3CRrPzZ/2.png" alt="2" border="0"></a>
+<a href="https://ibb.co/kSpdXLB"><img src="https://i.ibb.co/x7y46nL/3.png" alt="3" border="0"></a>
+<a href="https://ibb.co/K7RChHG"><img src="https://i.ibb.co/MpWqSLh/4.png" alt="4" border="0"></a>
+<a href="https://ibb.co/McpYHG4"><img src="https://i.ibb.co/bsLSV2Z/5.png" alt="5" border="0"></a>
+<a href="https://ibb.co/PcHPwBb"><img src="https://i.ibb.co/ByMQq87/6.png" alt="6" border="0"></a>
+<a href="https://ibb.co/VLWPPVW"><img src="https://i.ibb.co/8mDSSMD/7.png" alt="7" border="0"></a>
+<a href="https://ibb.co/Y7622rH"><img src="https://i.ibb.co/gMGyynk/8.png" alt="8" border="0"></a>
+<a href="https://ibb.co/bdW2yYW"><img src="https://i.ibb.co/7yYRTBY/9.png" alt="9" border="0"></a>
+<a href="https://ibb.co/nQGRSZH"><img src="https://i.ibb.co/ZcjNCtn/10.png" alt="10" border="0"></a>
+<a href="https://ibb.co/sy8vyqK"><img src="https://i.ibb.co/2gG7gdv/11.png" alt="11" border="0"></a>
+<a href="https://ibb.co/6BfSCVH"><img src="https://i.ibb.co/TLFG3p4/12.png" alt="12" border="0"></a>
+
+<!-- Put Images of R visualizations here-->
+
+
+
+
+<p>The response data from the Google forms of our experiment is available <a href="https://docs.google.com/spreadsheets/d/1T-B4GmX4qB_aj0x_P8RRCtM2ynskkspjl61aLsbDf7s/edit#gid=175342180">here</a>, and the datasets used in this project are available on <a href="https://github.com/VisDesignStudies/module-four-experiment-or-cvo-lstach">our GitHub</a>.</p>
+
+<script>
+
+  // ***** DATA 1 ***** //
+
+
+  const margin = { top: 50, right: 50, bottom: 50, left: 50 },
+    width = 800 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+  const svg1= d3
+    .select("#chart1")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Solar"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Wood"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 100 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg1.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg1.append("g")
+      .call(d3.axisLeft(y));
+
+    svg1.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLog() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+  /*  svg1.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+  const svg2 = d3
+    .select("#chart2")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Solar"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Wood"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 100 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg2.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg2.append("g")
+      .call(d3.axisLeft(y));
+
+    svg2.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLinear() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    svg2.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+
+  const svg3 = d3
+    .select("#chart3")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Solar"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Wood"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 100 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg3.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg3.append("g")
+      .call(d3.axisLeft(y));
+
+    svg3.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLog() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    svg3.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+
+
+  const svg4 = d3
+    .select("#chart3")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Solar"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Wood"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 100 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg4.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg4.append("g")
+      .call(d3.axisLeft(y));
+
+    svg4.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionQuad() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    svg4.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+  
+  
+  // ***** DATA 2 ***** //
+
+  const svg5 = d3
+    .select("#chart5")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Coal"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 1000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 1000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg5.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg5.append("g")
+      .call(d3.axisLeft(y));
+
+    svg5.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionQuad() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+   /* svg5.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+  const svg6 = d3
+    .select("#chart6")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Coal"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 1000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 1000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg6.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg6.append("g")
+      .call(d3.axisLeft(y));
+
+    svg6.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLinear() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    svg6.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+  const svg7 = d3
+    .select("#chart7")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Coal"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 1000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 1000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg7.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg7.append("g")
+      .call(d3.axisLeft(y));
+
+    svg7.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLog() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    svg7.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+  const svg8 = d3
+    .select("#chart8")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Coal"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 1000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 1000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg8.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg8.append("g")
+      .call(d3.axisLeft(y));
+
+    svg8.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionQuad() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    svg8.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+  // **** DATA 3 *** //
+
+  const svg9 = d3
+    .select("#chart9")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Natural Gas"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 3000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 3000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+    svg9.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    svg9.append("g")
+      .call(d3.axisLeft(y));
+
+    svg9.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionQuad() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    /* svg9.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+
+  const svg10 = d3
+    .select("#chart10")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Natural Gas"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 3000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 3000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+      svg10.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+      svg10.append("g")
+      .call(d3.axisLeft(y));
+
+      svg10.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLinear() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+    svg10.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+  const svg11 = d3
+    .select("#chart11")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Natural Gas"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 3000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 3000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+      svg11.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+      svg11.append("g")
+      .call(d3.axisLeft(y));
+
+      svg11.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLog() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+  svg11.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+  const svg12 = d3
+    .select("#chart12")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Commercial.Distillate Fuel Oil"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Commercial.Natural Gas"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 3000 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 3000 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+      svg12.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+      svg12.append("g")
+      .call(d3.axisLeft(y));
+
+      svg12.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionQuad() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+  svg12.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+  // DATASET 4
+
+  const svg13 = d3
+    .select("#chart13")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Residential.Kerosene"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Industrial.Other Petroleum Products"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 500 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+      svg13.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+      svg13.append("g")
+      .call(d3.axisLeft(y));
+
+      svg13.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionQuad() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+  /*svg13.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+  const svg14 = d3
+    .select("#chart14")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Residential.Kerosene"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Industrial.Other Petroleum Products"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 500 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+      svg14.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+      svg14.append("g")
+      .call(d3.axisLeft(y));
+
+      svg14.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLinear() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+  svg14.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+ 
+
+
+
+
+
+
+  const svg15 = d3
+    .select("#chart15")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Residential.Kerosene"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Industrial.Other Petroleum Products"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 500 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+      svg15.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+      svg15.append("g")
+      .call(d3.axisLeft(y));
+
+      svg15.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionLog() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+  svg15.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const svg16 = d3
+    .select("#chart16")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  d3.csv("https://raw.githubusercontent.com/VisDesignStudies/module-four-experiment-or-cvo-lstach/main/datasets/energy.csv", function (d) {
+    return {
+      value1: +d["Consumption.Residential.Kerosene"], // X value. Change this to change what value in the dataset is collected for the X axis.
+      value2: +d["Consumption.Industrial.Other Petroleum Products"], // Y value. Change this to change what value in the dataset is collected for the Y axis.
+    };
+  }).then(function (data) {
+    data = data.filter(function (d) {
+      return d.value1 <= 500 && d.value1 >= 10; // Remove data points with an X value above 100 and an X value below 10.
+    });
+
+    data = data.filter(function (d) {
+      return d.value2 <= 500 && d.value2 >= 10; // Remove data points with a Y value above 500 and an X value below 10.
+    });
+	
+	//data = [{value1: 1, value2: 1}, {value1: 10, value2: 10}, {value1: 100, value2: 100}, {value1: 37, value2: 37}]; // Test code. Checking if regression works as expected.
+
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value1)])
+      .range([0, width]);
+
+    // Corrected y scale
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value2)])
+      .range([height, 0]);
+
+      svg16.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+      svg16.append("g")
+      .call(d3.axisLeft(y));
+
+      svg16.append("g")
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("cx", function (d) { return x(d.value1); })
+      .attr("cy", function (d) { return y(d.value2); })
+      .attr("r", 5)
+	  .attr("fill", "white")
+	  .attr("stroke", "black");
+
+// Transform data for linear regression
+    const regressionData = data.map(d => [d.value1, d.value2]);
+
+    // Linear regression line
+    const regressionLine = d3.regressionQuad() // Define the regression line as a logarithmic best fit. Change this to d3.regressionLinear, or d3.regressionQuad to get those best fit lines instead.
+      .x(d => d[0])
+      .y(d => d[1]);
+
+    const lineData = regressionLine(regressionData);
+
+	console.log("a coefficient: " + lineData.a + "\n b coefficient: " + lineData.b + "\n r Squared: " + lineData.rSquared);
+	
+	///* This block adds the best fit line to the plot. If you want no best fit line, comment this entire block out.
+  svg16.append("path")
+      .datum(regressionLine(lineData))
+      .attr("class", "regression-line")
+      .attr("d", d3.line()
+        .x(d => x(d[0]))
+        .y(d => y(d[1])))
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("fill", "none");
+	 //*/
+  });
+
+
+
+</script>
+
+
